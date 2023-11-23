@@ -57,28 +57,28 @@ int index = 0;
         txtMa.setText("");
         txtHoTen.setText("");
         buttonGroup1.clearSelection();
-        cboLop.setSelectedIndex(-1);
+        cboLop.setSelectedIndex(1);
         txtDiaChi.setText("");
         txtNgaySinh.setText("");
         txtSDT.setText("");
         txtEmail.setText("");
         lblHinhAnh.setText("Hình Ảnh");
         lblHinhAnh.setIcon(null);
+        strHinhAnh = null;
     }
 
-    public void check(String ma) {
+    boolean check(String ma) {
         for (SinhVien sinhVien : list) {
             if (sinhVien.getID().equals(ma)) {
-                JOptionPane.showMessageDialog(this, "Đã có Sinh Viên Này");
-                return;
+                return false;
             }
         }
+        return true;
 
     }
 
     SinhVien getForm() {
         String Ma = txtMa.getText();
-        check(Ma);
         String Ten = txtHoTen.getText();
         String GioiTinh = "";
         if (rdNam.isSelected()) {
@@ -559,6 +559,11 @@ tblSinhVien.setRowSelectionInterval(index, index);
 
     private void btnThemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnThemMouseClicked
         // TODO add your handling code here:
+      String  Ma = txtMa.getText();
+        if (!check(Ma)) {
+             JOptionPane.showMessageDialog(this, "Đã có Sinh Viên Này");
+             return;
+        }
         list.add(getForm());
         LoadData();
     }//GEN-LAST:event_btnThemMouseClicked
@@ -651,20 +656,21 @@ tblSinhVien.setRowSelectionInterval(index, index);
 
     private void btnPrevMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPrevMouseClicked
         // TODO add your handling code here:
-        if (index == 0) {
-            index = list.size();
+        
+               if (index == list.size() - 1) {
+            index = -1;
         }
-        index--;
+        index++;
         LoadBanGhi();
 
     }//GEN-LAST:event_btnPrevMouseClicked
 
     private void btnNextMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNextMouseClicked
         // TODO add your handling code here:
-                if (index == list.size() - 1) {
-            index = -1;
+          if (index == 0) {
+            index = list.size();
         }
-        index++;
+        index--;
         LoadBanGhi();
     }//GEN-LAST:event_btnNextMouseClicked
 
