@@ -13,6 +13,7 @@ public class DN_DK_View extends javax.swing.JFrame {
     public DN_DK_View() {
         initComponents();
         setLocationRelativeTo(null);
+        setTitle("Form đăng kí, đăng nhập");
     }
 
     @SuppressWarnings("unchecked")
@@ -25,9 +26,9 @@ public class DN_DK_View extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         btnDangKy = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        txtDKPwd2 = new javax.swing.JTextField();
         txtDKUsn = new javax.swing.JTextField();
         txtDKPwd = new javax.swing.JPasswordField();
+        txtDKPwd2 = new javax.swing.JPasswordField();
         jPanel2 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -70,12 +71,11 @@ public class DN_DK_View extends javax.swing.JFrame {
                                     .addComponent(jLabel3)))
                             .addComponent(jLabel1))
                         .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtDKPwd2, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(txtDKUsn, javax.swing.GroupLayout.DEFAULT_SIZE, 211, Short.MAX_VALUE)
-                                .addComponent(txtDKPwd)))))
-                .addContainerGap(52, Short.MAX_VALUE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtDKUsn, javax.swing.GroupLayout.DEFAULT_SIZE, 211, Short.MAX_VALUE)
+                            .addComponent(txtDKPwd)
+                            .addComponent(txtDKPwd2))))
+                .addContainerGap(81, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -88,11 +88,11 @@ public class DN_DK_View extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(txtDKPwd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(txtDKPwd2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(20, 20, 20)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(txtDKPwd2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(17, 17, 17)
                 .addComponent(btnDangKy)
                 .addGap(45, 45, 45))
         );
@@ -260,7 +260,7 @@ public class DN_DK_View extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JPasswordField txtDKPwd;
-    private javax.swing.JTextField txtDKPwd2;
+    private javax.swing.JPasswordField txtDKPwd2;
     private javax.swing.JTextField txtDKUsn;
     private javax.swing.JPasswordField txtDNPwd;
     private javax.swing.JTextField txtDNUsn;
