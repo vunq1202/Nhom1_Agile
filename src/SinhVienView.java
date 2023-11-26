@@ -34,7 +34,40 @@ int index = 0;
         initComponents();
         model = (DefaultTableModel) tblSinhVien.getModel();
     }
+Boolean checkNull(){
+String ma = txtMa.getText();
+    if (ma.equals("")) {
+        JOptionPane.showMessageDialog(this, "Vui lòng nhập mã sinh viên");
+        return false;
+    }
+    String hoten = txtHoTen.getText();
+     if (hoten.equals("")) {
+        JOptionPane.showMessageDialog(this, "Vui lòng nhập tên");
+        return false;
+    }
+     String ngaySinh = txtNgaySinh.getText();
+      if (ngaySinh.equals("")) {
+        JOptionPane.showMessageDialog(this, "Vui lòng nhập ngày sinh");
+        return false;
+    }
+      String sdt = txtSDT.getText();
+       if (sdt.equals("")) {
+        JOptionPane.showMessageDialog(this, "Vui lòng nhập số điên thoại");
+        return false;
+    }
+       String email = txtEmail.getText();
+        if (email.equals("")) {
+        JOptionPane.showMessageDialog(this, "Vui lòng nhập Email");
+        return false;
+    }
+        String diachi = txtDiaChi.getText();
+         if (diachi.equals("")) {
+        JOptionPane.showMessageDialog(this, "Vui lòng nhập địa chỉ");
+        return false;
+    }
+        return true;
 
+}
     void LoadData() {
         model.setRowCount(0);
         for (SinhVien sinhVien : list) {
@@ -560,6 +593,9 @@ tblSinhVien.setRowSelectionInterval(index, index);
     private void btnThemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnThemMouseClicked
         // TODO add your handling code here:
       String  Ma = txtMa.getText();
+        if (!checkNull()) {
+            return;
+        }
         if (!check(Ma)) {
              JOptionPane.showMessageDialog(this, "Đã có Sinh Viên Này");
              return;
@@ -643,7 +679,7 @@ tblSinhVien.setRowSelectionInterval(index, index);
             lblHinhAnh.setIcon(null);
         }else{
         lblHinhAnh.setText("");
-        ImageIcon imgIcon = new ImageIcon(getClass().getResource( HinhAnh));
+        ImageIcon imgIcon = new ImageIcon(getClass().getResource(HinhAnh));
         Image img = imgIcon.getImage();
         img.getScaledInstance(lblHinhAnh.getWidth(),lblHinhAnh.getY(), 0);
         }
