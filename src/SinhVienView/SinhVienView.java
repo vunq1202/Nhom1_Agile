@@ -1,4 +1,7 @@
+package SinhVienView;
 
+
+import SinhVienView.SinhVien;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.io.File;
@@ -8,6 +11,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
@@ -26,8 +30,9 @@ public class SinhVienView extends javax.swing.JFrame {
     /**
      * Creates new form SinhVienView
      */
+    QLSV qlsv = new QLSV();
     DefaultTableModel model;
-    List<SinhVien> list = new ArrayList<>();
+    List<SinhVien> list = qlsv.getlstSV();
     String strHinhAnh = null;
 int index = 0;
     public SinhVienView() {
@@ -153,7 +158,16 @@ tblSinhVien.setRowSelectionInterval(index, index);
         txtNgaySinh.setText(sv.getNgaySinh());
         txtSDT.setText(sv.getSDT());
         txtEmail.setText(sv.getEmail());
-        lblHinhAnh.setText(sv.getAnh());
+        if (sv.getAnh().equals("NO AVATA")) {
+            lblHinhAnh.setText("NO AVATA");
+           lblHinhAnh.setIcon(null);
+      }else{
+            lblHinhAnh.setText("");
+            ImageIcon imageIcon = new ImageIcon(getClass().getResource("/Hinh/"  + sv.getAnh()));
+            Image img = imageIcon.getImage();
+            img.getScaledInstance(lblHinhAnh.getWidth(), lblHinhAnh.getY(), 0);
+            lblHinhAnh.setIcon(imageIcon);
+        }
     }
 
     /**
@@ -574,7 +588,7 @@ tblSinhVien.setRowSelectionInterval(index, index);
 
     private void lblHinhAnhMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblHinhAnhMouseClicked
         try {
-            JFileChooser jfc = new JFileChooser("");
+            JFileChooser jfc = new JFileChooser("src\\Hinh");
             jfc.showOpenDialog(null);
             File file = jfc.getSelectedFile();
 
@@ -610,6 +624,7 @@ tblSinhVien.setRowSelectionInterval(index, index);
         if (row >= 0) {
             list.set(row, getForm());
             LoadData();
+            JOptionPane.showMessageDialog(this, "Sửa thông tin thành công");
         }
     }//GEN-LAST:event_btnSuaMouseClicked
     void searchByName(String ten) {
@@ -654,35 +669,40 @@ tblSinhVien.setRowSelectionInterval(index, index);
 
     private void tblSinhVienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblSinhVienMouseClicked
         // TODO add your handling code here:
-        int i = tblSinhVien.getSelectedRow();
-        String Ma = (String) tblSinhVien.getValueAt(i, 0);
-        txtMa.setText(Ma);
-        String HoTen = (String) tblSinhVien.getValueAt(i, 1);
-        txtHoTen.setText(HoTen);
-        String GioiTinh = (String) tblSinhVien.getValueAt(i, 2);
-        if (GioiTinh.equals("Nam")) {
-            rdNam.setSelected(true);
-        }else{rdNu.setSelected(true);}
-        String Lop = (String) tblSinhVien.getValueAt(i, 3);
-        cboLop.setSelectedItem(Lop);
-        String DiaChi = (String) tblSinhVien.getValueAt(i, 4);
-        txtDiaChi.setText(DiaChi);
-        String ngaySinh = (String) tblSinhVien.getValueAt(i, 5);
-        txtNgaySinh.setText(ngaySinh);
-        String SDT = (String) tblSinhVien.getValueAt(i, 6);
-        txtSDT.setText(SDT);
-        String Email = (String) tblSinhVien.getValueAt(i, 7);
-        txtEmail.setText(Email);
-        String HinhAnh = (String) tblSinhVien.getValueAt(i, 8);
-        if (HinhAnh.equals("NO AVATA")) {
-            lblHinhAnh.setText("NO AVATA");
-            lblHinhAnh.setIcon(null);
-        }else{
-        lblHinhAnh.setText("");
-        ImageIcon imgIcon = new ImageIcon(getClass().getResource(HinhAnh));
-        Image img = imgIcon.getImage();
-        img.getScaledInstance(lblHinhAnh.getWidth(),lblHinhAnh.getY(), 0);
-        }
+        int id = tblSinhVien.rowAtPoint(evt.getPoint());
+        String maSv = tblSinhVien.getValueAt(id, 0).toString();
+           SinhVien sv = qlsv.getSVbyID(maSv);
+           setForm(sv);
+//        String Ma = (String) tblSinhVien.getValueAt(i, 0);
+//        txtMa.setText(Ma);
+//        String HoTen = (String) tblSinhVien.getValueAt(i, 1);
+//        txtHoTen.setText(HoTen);
+//        String GioiTinh = (String) tblSinhVien.getValueAt(i, 2);
+//        if (GioiTinh.equals("Nam")) {
+//            rdNam.setSelected(true);
+//        }else{rdNu.setSelected(true);}
+//        String Lop = (String) tblSinhVien.getValueAt(i, 3);
+//        cboLop.setSelectedItem(Lop);
+//        String DiaChi = (String) tblSinhVien.getValueAt(i, 4);
+//        txtDiaChi.setText(DiaChi);
+//        String ngaySinh = (String) tblSinhVien.getValueAt(i, 5);
+//        txtNgaySinh.setText(ngaySinh);
+//        String SDT = (String) tblSinhVien.getValueAt(i, 6);
+//        txtSDT.setText(SDT);
+//        String Email = (String) tblSinhVien.getValueAt(i, 7);
+//        txtEmail.setText(Email);
+//        String HinhAnh = (String) tblSinhVien.getValueAt(i, 8);
+//        if (HinhAnh.equals("NO AVATA")) {
+//            lblHinhAnh.setText("NO AVATA");
+//            lblHinhAnh.setIcon(null);
+//        }else{
+//        lblHinhAnh.setText("");
+//        ImageIcon imgIcon = new ImageIcon(getClass().getResource(HinhAnh));
+//        Image img = imgIcon.getImage();
+//         int width = lblHinhAnh.getWidth();
+//            int height = lblHinhAnh.getHeight();
+//        lblHinhAnh.setIcon(ImageIcon(img.getScaledInstance(lblHinhAnh.getWidth(),lblHinhAnh.getY(), 0)));
+//        }
     }//GEN-LAST:event_tblSinhVienMouseClicked
 
     private void btnClearMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnClearMouseClicked
@@ -799,4 +819,8 @@ tblSinhVien.setRowSelectionInterval(index, index);
     private javax.swing.JTextField txtSDT;
     private javax.swing.JTextField txtTimTen;
     // End of variables declaration//GEN-END:variables
+
+    private Icon ImageIcon(Image scaledInstance) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }
