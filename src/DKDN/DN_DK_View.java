@@ -1,13 +1,15 @@
 
 package DKDN;
 
+import SinhVienView.SinhVienView;
 import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
                 
 
 public class DN_DK_View extends javax.swing.JFrame {
-
-    ArrayList<Account> list = new ArrayList<>();
+    accountService Service = new accountService();
+    List<Account> list = Service.getListaAccounts();
 
     
     public DN_DK_View() {
@@ -198,7 +200,10 @@ public class DN_DK_View extends javax.swing.JFrame {
                     if (pwd.equals(acc.getPassWord())) {
                         JOptionPane.showMessageDialog(this, "Đăng nhập thành công !");
                         found = true;
-                        return;
+                       SinhVienView mainView = new SinhVienView();
+                       mainView.setVisible(true);
+                       mainView.setLocationRelativeTo(null);
+                        this.dispose();
                     } else {
                         JOptionPane.showMessageDialog(this, "Sai mật khẩu !");
                         found = false;
