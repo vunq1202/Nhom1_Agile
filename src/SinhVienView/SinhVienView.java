@@ -627,26 +627,30 @@ tblSinhVien.setRowSelectionInterval(index, index);
             JOptionPane.showMessageDialog(this, "Sửa thông tin thành công");
         }
     }//GEN-LAST:event_btnSuaMouseClicked
-    void searchByName(String ten) {
-        DefaultTableModel searchModel = (DefaultTableModel) tblSinhVien.getModel();
-        searchModel.setRowCount(0);
-
-        for (SinhVien sinhVien : list) {
-            if (sinhVien.getTen().toLowerCase().contains(ten.toLowerCase())) {
-                searchModel.addRow(new Object[]{
-                    sinhVien.getID(),
-                    sinhVien.getTen(),
-                    sinhVien.getGioiTinh(),
-                    sinhVien.getLop(),
-                    sinhVien.getDiaChi(),
-                    sinhVien.getNgaySinh(),
-                    sinhVien.getSDT(),
-                    sinhVien.getEmail(),
-                    sinhVien.getAnh()
-                });
-            }
+   void searchByName(String ten) {
+    DefaultTableModel searchModel = (DefaultTableModel) tblSinhVien.getModel();
+    searchModel.setRowCount(0);
+    boolean found = false; 
+    for (SinhVien sinhVien : list) {
+        if (sinhVien.getTen().toLowerCase().contains(ten.toLowerCase())) {
+            searchModel.addRow(new Object[]{
+                sinhVien.getID(),
+                sinhVien.getTen(),
+                sinhVien.getGioiTinh(),
+                sinhVien.getLop(),
+                sinhVien.getDiaChi(),
+                sinhVien.getNgaySinh(),
+                sinhVien.getSDT(),
+                sinhVien.getEmail(),
+                sinhVien.getAnh()
+            });
+            found = true; 
         }
     }
+    if (!found) {
+        JOptionPane.showMessageDialog(null, "Không tìm thấy tên.", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+        
+    }}
     private void btnTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimKiemActionPerformed
         // TODO add your handling code here:
          String ten = txtTimTen.getText();
