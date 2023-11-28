@@ -38,6 +38,7 @@ int index = 0;
     public SinhVienView() {
         initComponents();
         model = (DefaultTableModel) tblSinhVien.getModel();
+        LoadData();
     }
 Boolean checkNull(){
 String ma = txtMa.getText();
@@ -131,7 +132,7 @@ String ma = txtMa.getText();
         String Emai = txtEmail.getText();
         String HinhAnh = "";
         if (strHinhAnh == null) {
-            HinhAnh = "NO AVATA";
+            HinhAnh = "NO AVATAR";
         } else {
             HinhAnh = strHinhAnh;
         }
@@ -158,8 +159,8 @@ tblSinhVien.setRowSelectionInterval(index, index);
         txtNgaySinh.setText(sv.getNgaySinh());
         txtSDT.setText(sv.getSDT());
         txtEmail.setText(sv.getEmail());
-        if (sv.getAnh().equals("NO AVATA")) {
-            lblHinhAnh.setText("NO AVATA");
+        if (sv.getAnh().equals("NO AVATAR")) {
+            lblHinhAnh.setText("NO AVATAR");
            lblHinhAnh.setIcon(null);
       }else{
             lblHinhAnh.setText("");
