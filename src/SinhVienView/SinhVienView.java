@@ -41,32 +41,32 @@ int index = 0;
     }
 Boolean checkNull(){
 String ma = txtMa.getText();
-    if (ma.equals("")) {
+    if (ma.trim().equals("")) {
         JOptionPane.showMessageDialog(this, "Vui lòng nhập mã sinh viên");
         return false;
     }
     String hoten = txtHoTen.getText();
-     if (hoten.equals("")) {
+     if (hoten.trim().equals("")) {
         JOptionPane.showMessageDialog(this, "Vui lòng nhập tên");
         return false;
     }
      String ngaySinh = txtNgaySinh.getText();
-      if (ngaySinh.equals("")) {
+      if (ngaySinh.trim().equals("")) {
         JOptionPane.showMessageDialog(this, "Vui lòng nhập ngày sinh");
         return false;
     }
       String sdt = txtSDT.getText();
-       if (sdt.equals("")) {
+       if (sdt.trim().equals("")) {
         JOptionPane.showMessageDialog(this, "Vui lòng nhập số điên thoại");
         return false;
     }
        String email = txtEmail.getText();
-        if (email.equals("")) {
+        if (email.trim().equals("")) {
         JOptionPane.showMessageDialog(this, "Vui lòng nhập Email");
         return false;
     }
         String diachi = txtDiaChi.getText();
-         if (diachi.equals("")) {
+         if (diachi.trim().equals("")) {
         JOptionPane.showMessageDialog(this, "Vui lòng nhập địa chỉ");
         return false;
     }
@@ -259,7 +259,7 @@ tblSinhVien.setRowSelectionInterval(index, index);
         buttonGroup1.add(rdNu);
         rdNu.setText("Nữ");
 
-        cboLop.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SD18403", "SD18405", "SD18406", " " }));
+        cboLop.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SD18403", "SD18405", "SD18406" }));
         cboLop.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cboLopActionPerformed(evt);

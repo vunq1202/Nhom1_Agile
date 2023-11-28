@@ -321,11 +321,10 @@
         <Component class="javax.swing.JComboBox" name="cboLop">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="4">
+              <StringArray count="3">
                 <StringItem index="0" value="SD18403"/>
                 <StringItem index="1" value="SD18405"/>
                 <StringItem index="2" value="SD18406"/>
-                <StringItem index="3" value=" "/>
               </StringArray>
             </Property>
           </Properties>
