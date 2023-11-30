@@ -174,6 +174,12 @@ public class DN_DK_View extends javax.swing.JFrame {
         String usn = txtDKUsn.getText();
         String pwd = txtDKPwd.getText();
         String cpwd = txtDKPwd2.getText();
+        for (Account ac : list) {
+            if (usn.equals(ac.getUserName())) {
+                JOptionPane.showMessageDialog(this, "tài khoản này đã tồn tại !!!");
+                return;
+            }
+        }
         if (usn.trim().isEmpty()) {
             JOptionPane.showMessageDialog(this, "tài khoản không được bỏ trống");
             return;

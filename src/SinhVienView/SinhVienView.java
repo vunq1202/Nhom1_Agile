@@ -653,8 +653,11 @@ tblSinhVien.setRowSelectionInterval(index, index);
         
     }}
     private void btnTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimKiemActionPerformed
-        // TODO add your handling code here:
+        // TODO add your handling code here:    
          String ten = txtTimTen.getText();
+         if (ten.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập tên bạn cần tìm :)");
+        }
         if (!ten.isEmpty()) {
             searchByName(ten);
         }else{
