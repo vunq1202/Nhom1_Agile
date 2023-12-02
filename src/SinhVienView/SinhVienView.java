@@ -607,7 +607,7 @@ public class SinhVienView extends javax.swing.JFrame {
     }//GEN-LAST:event_lblHinhAnhMouseClicked
 
     private void btnThemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnThemMouseClicked
-         if (!checkID()) {
+        if (!checkID()) {
             return;
         }
         if (!checkNull()) {
@@ -616,19 +616,28 @@ public class SinhVienView extends javax.swing.JFrame {
         list.add(getForm());
         LoadData();
     }//GEN-LAST:event_btnThemMouseClicked
-    public boolean xacnhan() {
-      int result = JOptionPane.showConfirmDialog(this, "Bạn có chắc muốn sửa thông tin sinh viên này ?","xác nhận", JOptionPane.YES_NO_OPTION);
-        if (result==JOptionPane.YES_OPTION) {
+    public boolean xacnhanSua() {
+        int result = JOptionPane.showConfirmDialog(this, "Bạn có chắc muốn sửa thông tin sinh viên này ?", "xác nhận", JOptionPane.YES_NO_OPTION);
+        if (result == JOptionPane.YES_OPTION) {
             return true;
-        }else{
-        return false;
+        } else {
+            return false;
+        }
+    }
+
+    public boolean xacnhanXoa() {
+        int result = JOptionPane.showConfirmDialog(this, "Bạn có chắc muốn xóa thông tin sinh viên này ?", "xác nhận", JOptionPane.YES_NO_OPTION);
+        if (result == JOptionPane.YES_OPTION) {
+            return true;
+        } else {
+            return false;
         }
     }
     private void btnSuaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSuaMouseClicked
         if (!checkID()) {
             return;
         }
-        if (!xacnhan()) {
+        if (!xacnhanSua()) {
             return;
         }
         if (!checkNull()) {
@@ -681,12 +690,17 @@ public class SinhVienView extends javax.swing.JFrame {
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
         // TODO add your handling code here:
+        if (!xacnhanXoa()) {
+            return;
+        }
         int i = tblSinhVien.getSelectedRow();
         if (i >= 0) {
             list.remove(i);
             JOptionPane.showMessageDialog(this, "Xóa thành công");
             LoadData();
+            reset();
         }
+       
     }//GEN-LAST:event_btnXoaActionPerformed
 
     private void tblSinhVienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblSinhVienMouseClicked
