@@ -1,6 +1,5 @@
 package SinhVienView;
 
-
 import SinhVienView.SinhVien;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
@@ -34,46 +33,49 @@ public class SinhVienView extends javax.swing.JFrame {
     DefaultTableModel model;
     List<SinhVien> list = qlsv.getlstSV();
     String strHinhAnh = null;
-int index = 0;
+    int index = 0;
+
     public SinhVienView() {
         initComponents();
         model = (DefaultTableModel) tblSinhVien.getModel();
         LoadData();
     }
-Boolean checkNull(){
-String ma = txtMa.getText();
-    if (ma.trim().equals("")) {
-        JOptionPane.showMessageDialog(this, "Vui lòng nhập mã sinh viên");
-        return false;
-    }
-    String hoten = txtHoTen.getText();
-     if (hoten.trim().equals("")) {
-        JOptionPane.showMessageDialog(this, "Vui lòng nhập tên");
-        return false;
-    }
-     String ngaySinh = txtNgaySinh.getText();
-      if (ngaySinh.trim().equals("")) {
-        JOptionPane.showMessageDialog(this, "Vui lòng nhập ngày sinh");
-        return false;
-    }
-      String sdt = txtSDT.getText();
-       if (sdt.trim().equals("")) {
-        JOptionPane.showMessageDialog(this, "Vui lòng nhập số điên thoại");
-        return false;
-    }
-       String email = txtEmail.getText();
+
+    Boolean checkNull() {
+        String ma = txtMa.getText();
+        if (ma.trim().equals("")) {
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập mã sinh viên");
+            return false;
+        }
+        String hoten = txtHoTen.getText();
+        if (hoten.trim().equals("")) {
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập tên");
+            return false;
+        }
+        String ngaySinh = txtNgaySinh.getText();
+        if (ngaySinh.trim().equals("")) {
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập ngày sinh");
+            return false;
+        }
+        String sdt = txtSDT.getText();
+        if (sdt.trim().equals("")) {
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập số điên thoại");
+            return false;
+        }
+        String email = txtEmail.getText();
         if (email.trim().equals("")) {
-        JOptionPane.showMessageDialog(this, "Vui lòng nhập Email");
-        return false;
-    }
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập Email");
+            return false;
+        }
         String diachi = txtDiaChi.getText();
-         if (diachi.trim().equals("")) {
-        JOptionPane.showMessageDialog(this, "Vui lòng nhập địa chỉ");
-        return false;
-    }
+        if (diachi.trim().equals("")) {
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập địa chỉ");
+            return false;
+        }
         return true;
 
-}
+    }
+
     void LoadData() {
         model.setRowCount(0);
         for (SinhVien sinhVien : list) {
@@ -106,9 +108,10 @@ String ma = txtMa.getText();
         strHinhAnh = null;
     }
 
-    boolean check(String ma) {
+    boolean checkID() {
         for (SinhVien sinhVien : list) {
-            if (sinhVien.getID().equals(ma)) {
+            if (sinhVien.getID().equals(txtMa.getText())) {
+                JOptionPane.showMessageDialog(this, "Đã có sinh viên này");
                 return false;
             }
         }
@@ -139,16 +142,14 @@ String ma = txtMa.getText();
         return new SinhVien(Ma, LopHoc, Ten, SDT, NgaySinh, HinhAnh, DiaChi, GioiTinh, Emai);
     }
 
-private void LoadBanGhi(){
-tblSinhVien.setRowSelectionInterval(index, index);
-}
-
-
+    private void LoadBanGhi() {
+        tblSinhVien.setRowSelectionInterval(index, index);
+    }
 
     void setForm(SinhVien sv) {
         txtMa.setText(sv.getID());
         txtHoTen.setText(sv.getTen());
-        
+
         if (sv.getGioiTinh().equals("Nam")) {
             rdNam.setSelected(true);
         } else {
@@ -161,10 +162,10 @@ tblSinhVien.setRowSelectionInterval(index, index);
         txtEmail.setText(sv.getEmail());
         if (sv.getAnh().equals("NO AVATAR")) {
             lblHinhAnh.setText("NO AVATAR");
-           lblHinhAnh.setIcon(null);
-      }else{
+            lblHinhAnh.setIcon(null);
+        } else {
             lblHinhAnh.setText("");
-            ImageIcon imageIcon = new ImageIcon(getClass().getResource("/Hinh/"  + sv.getAnh()));
+            ImageIcon imageIcon = new ImageIcon(getClass().getResource("/Hinh/" + sv.getAnh()));
             Image img = imageIcon.getImage();
             img.getScaledInstance(lblHinhAnh.getWidth(), lblHinhAnh.getY(), 0);
             lblHinhAnh.setIcon(imageIcon);
@@ -606,21 +607,30 @@ tblSinhVien.setRowSelectionInterval(index, index);
     }//GEN-LAST:event_lblHinhAnhMouseClicked
 
     private void btnThemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnThemMouseClicked
-        // TODO add your handling code here:
-      String  Ma = txtMa.getText();
-        if (!checkNull()) {
+         if (!checkID()) {
             return;
         }
-        if (!check(Ma)) {
-             JOptionPane.showMessageDialog(this, "Đã có Sinh Viên Này");
-             return;
+        if (!checkNull()) {
+            return;
         }
         list.add(getForm());
         LoadData();
     }//GEN-LAST:event_btnThemMouseClicked
-
+    public boolean xacnhan() {
+      int result = JOptionPane.showConfirmDialog(this, "Bạn có chắc muốn sửa thông tin sinh viên này ?","xác nhận", JOptionPane.YES_NO_OPTION);
+        if (result==JOptionPane.YES_OPTION) {
+            return true;
+        }else{
+        return false;
+        }
+    }
     private void btnSuaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSuaMouseClicked
-        // TODO add your handling code here:
+        if (!checkID()) {
+            return;
+        }
+        if (!xacnhan()) {
+            return;
+        }
         if (!checkNull()) {
             return;
         }
@@ -631,39 +641,40 @@ tblSinhVien.setRowSelectionInterval(index, index);
             JOptionPane.showMessageDialog(this, "Sửa thông tin thành công");
         }
     }//GEN-LAST:event_btnSuaMouseClicked
-   void searchByName(String ten) {
-    DefaultTableModel searchModel = (DefaultTableModel) tblSinhVien.getModel();
-    searchModel.setRowCount(0);
-    boolean found = false; 
-    for (SinhVien sinhVien : list) {
-        if (sinhVien.getTen().toLowerCase().contains(ten.toLowerCase())) {
-            searchModel.addRow(new Object[]{
-                sinhVien.getID(),
-                sinhVien.getTen(),
-                sinhVien.getGioiTinh(),
-                sinhVien.getLop(),
-                sinhVien.getDiaChi(),
-                sinhVien.getNgaySinh(),
-                sinhVien.getSDT(),
-                sinhVien.getEmail(),
-                sinhVien.getAnh()
-            });
-            found = true; 
+    void searchByName(String ten) {
+        DefaultTableModel searchModel = (DefaultTableModel) tblSinhVien.getModel();
+        searchModel.setRowCount(0);
+        boolean found = false;
+        for (SinhVien sinhVien : list) {
+            if (sinhVien.getTen().toLowerCase().contains(ten.toLowerCase())) {
+                searchModel.addRow(new Object[]{
+                    sinhVien.getID(),
+                    sinhVien.getTen(),
+                    sinhVien.getGioiTinh(),
+                    sinhVien.getLop(),
+                    sinhVien.getDiaChi(),
+                    sinhVien.getNgaySinh(),
+                    sinhVien.getSDT(),
+                    sinhVien.getEmail(),
+                    sinhVien.getAnh()
+                });
+                found = true;
+            }
+        }
+        if (!found) {
+            JOptionPane.showMessageDialog(null, "Không tìm thấy tên.", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+
         }
     }
-    if (!found) {
-        JOptionPane.showMessageDialog(null, "Không tìm thấy tên.", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
-        
-    }}
     private void btnTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimKiemActionPerformed
         // TODO add your handling code here:    
-         String ten = txtTimTen.getText();
-         if (ten.isEmpty()) {
+        String ten = txtTimTen.getText();
+        if (ten.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Vui lòng nhập tên bạn cần tìm :)");
         }
         if (!ten.isEmpty()) {
             searchByName(ten);
-        }else{
+        } else {
             LoadData();
         }
     }//GEN-LAST:event_btnTimKiemActionPerformed
@@ -671,7 +682,7 @@ tblSinhVien.setRowSelectionInterval(index, index);
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
         // TODO add your handling code here:
         int i = tblSinhVien.getSelectedRow();
-        if (i>=0) {
+        if (i >= 0) {
             list.remove(i);
             JOptionPane.showMessageDialog(this, "Xóa thành công");
             LoadData();
@@ -682,8 +693,8 @@ tblSinhVien.setRowSelectionInterval(index, index);
         // TODO add your handling code here:
         int id = tblSinhVien.rowAtPoint(evt.getPoint());
         String maSv = tblSinhVien.getValueAt(id, 0).toString();
-           SinhVien sv = qlsv.getSVbyID(maSv);
-           setForm(sv);
+        SinhVien sv = qlsv.getSVbyID(maSv);
+        setForm(sv);
 //        String Ma = (String) tblSinhVien.getValueAt(i, 0);
 //        txtMa.setText(Ma);
 //        String HoTen = (String) tblSinhVien.getValueAt(i, 1);
@@ -723,8 +734,8 @@ tblSinhVien.setRowSelectionInterval(index, index);
 
     private void btnPrevMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPrevMouseClicked
         // TODO add your handling code here:
-        
-               if (index == list.size() - 1) {
+
+        if (index == list.size() - 1) {
             index = -1;
         }
         index++;
@@ -734,7 +745,7 @@ tblSinhVien.setRowSelectionInterval(index, index);
 
     private void btnNextMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNextMouseClicked
         // TODO add your handling code here:
-          if (index == 0) {
+        if (index == 0) {
             index = list.size();
         }
         index--;
