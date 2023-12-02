@@ -621,6 +621,9 @@ tblSinhVien.setRowSelectionInterval(index, index);
 
     private void btnSuaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSuaMouseClicked
         // TODO add your handling code here:
+        if (!checkNull()) {
+            return;
+        }
         int row = tblSinhVien.getSelectedRow();
         if (row >= 0) {
             list.set(row, getForm());
