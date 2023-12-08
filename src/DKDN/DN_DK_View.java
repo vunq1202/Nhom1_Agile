@@ -193,6 +193,9 @@ public class DN_DK_View extends javax.swing.JFrame {
         } else {
             Account newUser = new Account(usn, pwd, cpwd);
             list.add(newUser);
+            txtDKPwd.setText("");
+            txtDKPwd2.setText("");
+            txtDKUsn.setText("");
             JOptionPane.showMessageDialog(this, "Đăng ký thành công !");
         }
 
